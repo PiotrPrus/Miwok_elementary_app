@@ -24,7 +24,6 @@ public class PhrasesActivity extends AppCompatActivity {
                     if (focusChange == AudioManager.AUDIOFOCUS_LOSS_TRANSIENT ||
                             focusChange == AudioManager.AUDIOFOCUS_LOSS_TRANSIENT_CAN_DUCK) {
                         mMediaPlayer.pause();
-                        // The seekTo(0) means that the audio file will start from the beginning, not where it was left.
                         mMediaPlayer.seekTo(0);
                     } else if (focusChange == AudioManager.AUDIOFOCUS_GAIN) {
                         mMediaPlayer.start();
@@ -72,15 +71,11 @@ public class PhrasesActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
                 releaseMediaPlayer();
                 Word word = words.get(position);
-                // Request audio focus for playback
                 int result = mAudioManager.requestAudioFocus(mOnAudioFocusChangeListener,
-                        // Use the music stream.
                         AudioManager.STREAM_MUSIC,
-                        // Request focus.
                         AudioManager.AUDIOFOCUS_GAIN_TRANSIENT);
 
                 if (result == AudioManager.AUDIOFOCUS_REQUEST_GRANTED) {
-                    // Start playback.
                     mMediaPlayer = MediaPlayer.create(PhrasesActivity.this, word.getSoundResourceId());
                     mMediaPlayer.start();
 

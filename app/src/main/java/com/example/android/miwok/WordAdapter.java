@@ -46,11 +46,8 @@ public class WordAdapter extends ArrayAdapter<Word> {
         ImageView imageView = (ImageView) listItemView.findViewById(R.id.miwok_image);
         if(currentWord.hasImage()) {
             imageView.setImageResource(currentWord.getImageResourceId());
-            //Make sure the view is visible
             imageView.setVisibility(View.VISIBLE);
         }else{
-            // If there is no image(like PhrasesActivity), do not display
-            // the image and do not show BLANK space in the place of image
             imageView.setVisibility(View.GONE);
         }
 
